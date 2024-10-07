@@ -17,6 +17,7 @@ body {
   transform: translateX(-50%); /* 추가 */
   width: 100%; /* 추가 */
   max-width: 1200px; /* 추가 */
+  max-height: 100px;
   background-color: #fff; /* 추가 */
   z-index: 1000; /* 추가 */
   padding: clamp(10px, 2vw, 20px);
@@ -42,6 +43,7 @@ body {
 .type-filter {
   display: flex;
   align-items: center;
+  min-width: 80px; /* 추가: 최소 너비 설정 */
 }
 
 .type-filter input[type="checkbox"] {
@@ -84,6 +86,8 @@ body {
 
 .type-filter label {
   font-size: clamp(12px, 1.5vw, 16px);
+  white-space: nowrap; /* 추가: 라벨 텍스트가 줄 바꿈되지 않도록 설정 */
+  min-width: 60px; /* 추가: 라벨의 최소 너비 설정 */
 }
 
 .type-filter input[type="checkbox"] {
