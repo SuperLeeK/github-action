@@ -9,6 +9,7 @@ class Counter {
     this.lastModified = this.loadLastModified();
     this.element = this.createCounterElement();
     this.updateDisplay();
+    this.updateGradientBackground(); // 초기 배경 설정
   }
 
   createCounterElement() {
@@ -53,6 +54,7 @@ class Counter {
     this.count += delta;
     this.updateDisplay();
     this.saveCount();
+    this.updateGradientBackground(); // 새로 추가된 라인
     if (this.count !== oldCount) {
       this.updateLastModified();
     }
@@ -71,7 +73,7 @@ class Counter {
       hour12: false
     }).replace(/[. :]/g, '');
 
-    const textToCopy = `${formattedDate}_${nickname.toUpperCase()} ${this.label} ${this.grade} ${this.count}클`;
+    const textToCopy = `${nickname.toUpperCase()} ${formattedDate} ${this.label} ${this.grade} ${this.count}클`;
 
     navigator.clipboard.writeText(textToCopy).then(() => {
       console.log('텍스트가 클립보드에 복사되었습니다: ' + textToCopy);
@@ -85,14 +87,14 @@ class Counter {
     const copyTooltip = document.createElement('div');
     copyTooltip.className = 'copy-tooltip';
     copyTooltip.innerHTML = `복사됨!<br><span class="copied-text">${copiedText}</span>`;
-    
+
     // 툴팁을 body에 추가
     document.body.appendChild(copyTooltip);
 
     // 화면 중앙 위치 계산
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-    
+
     // 툴팁 위치 설정
     copyTooltip.style.left = `${viewportWidth / 2}px`;
     copyTooltip.style.top = `20px`; // 화면 상단에서 20px 아래에 위치
@@ -108,7 +110,7 @@ class Counter {
       copyTooltip.style.opacity = '0';
       copyTooltip.style.transform = 'translate(-50%, 0) scale(0.9)';
 
-      // 애니메이션이 끝난 후 요소 제거
+      // 애니메이션이 끝난  요소 제거
       setTimeout(() => {
         copyTooltip.remove();
       }, 300);
@@ -120,13 +122,13 @@ class Counter {
       const tooltip = document.createElement('div');
       tooltip.className = 'tooltip';
       tooltip.textContent = `최근 수정: ${new Date(this.lastModified).toLocaleString()}`;
-      
+
       // 마우스 위치에 툴팁 표시
       document.addEventListener('mousemove', (e) => {
         tooltip.style.left = `${e.clientX + 10}px`;
         tooltip.style.top = `${e.clientY + 10}px`;
       });
-      
+
       document.body.appendChild(tooltip);
       this.tooltipElement = tooltip;
     }
@@ -186,6 +188,12 @@ class Counter {
 
   appendTo(parentElement) {
     parentElement.appendChild(this.element);
+  }
+
+  updateGradientBackground() {
+    console.log(`updateGradientBackground`, this.count);
+    const percentage = Math.min(this.count / 100, 1);
+    this.element.style.setProperty('--fill-percentage', percentage);
   }
 }
 

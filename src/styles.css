@@ -143,14 +143,16 @@ body {
 
 .counters-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill,
-      minmax(clamp(250px, 30vw, 300px), 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(250px, 30vw, 300px), 1fr)
+  );
   gap: clamp(10px, 2vw, 20px);
 }
 
 .counter {
   position: relative;
-  /* 부모 요소에 relative 추가 */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -159,6 +161,21 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
+}
+
+.counter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #71ff76, #00ff0d);
+  opacity: 0.3;
+  z-index: 0;
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  transform: scaleX(var(--fill-percentage, 0));
 }
 
 .counter-header {
@@ -171,6 +188,7 @@ body {
   width: clamp(20px, 5vw, 60px);
   height: clamp(20px, 5vw, 60px);
   margin-right: 10px;
+  z-index: 100;
   /* 이미지와 라벨 사이 간격 */
 }
 
@@ -224,7 +242,9 @@ body {
   z-index: 1000;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
   text-align: center;
   pointer-events: none;
   transform: translate(-50%, 0) scale(0.9);
