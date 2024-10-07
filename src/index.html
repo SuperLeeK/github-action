@@ -36,11 +36,17 @@
         </div>
     </div>
     <div id="counters"></div>
+    <div id="data-import-export">
+        <button id="exportButton" onclick="exportData()">내보내기</button>
+        <input type="file" id="importFile" style="display:none;" onchange="importData(this.files[0])">
+        <button id="importButton" onclick="document.getElementById('importFile').click()">불러오기</button>
+    </div>
 
     <script src="bundle.js"></script>
     <script src="counter.js"></script>
     <script src="counterConfig.js"></script>
     <script src="main.js"></script>
+    <script src="data.js"></script>
 </body>
 
 </html>

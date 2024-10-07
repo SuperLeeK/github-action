@@ -11,41 +11,35 @@ class Counter {
   }
 
   createCounterElement() {
-    const container = document.createElement('div');
-    container.className = 'counter';
-    container.innerHTML = `
-        <span class="counter-label">${this.label}</span>
-        <button class="increase"></button>
-        <span class="counter-value" id="${this.id}">0</span>
-        <button class="decrease"></button>
+    const element = document.createElement('div');
+    element.className = 'counter';
+    element.innerHTML = `
+      <span class="counter-label">${this.label}</span>
+      <div class="counter-controls">
+        <button class="decrement">-</button>
+        <span class="counter-value" id="${this.id}">${this.count}</span>
+        <button class="increment">+</button>
+      </div>
     `;
 
-    const decreaseButton = container.querySelector('.decrease');
-    const increaseButton = container.querySelector('.increase');
-    const counterValue = container.querySelector('.counter-value');
+    const decrementButton = element.querySelector('.decrement');
+    const incrementButton = element.querySelector('.increment');
 
-    decreaseButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.changeCount(-1);
-    });
+    decrementButton.addEventListener('click', () => this.changeCount(-1));
+    incrementButton.addEventListener('click', () => this.changeCount(1));
 
-    increaseButton.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.changeCount(1);
-    });
+    // 횟수 표시 요소에 클릭 이벤트를 추가하지 않음
 
-    counterValue.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.copyToClipboard();
-    });
-
-    container.addEventListener('mouseenter', () => this.showLastModified());
-    container.addEventListener('mouseleave', () => this.hideLastModified());
-
-    return container;
+    return element;
   }
 
   changeCount(delta) {
+    const nickname = localStorage.getItem('userNickname');
+    if (!nickname) {
+      alert('닉네임을 먼저 설정해주세요.');
+      return; // 실행 취소
+    }
+
     if (delta < 0 && this.count === 0) return; // 음수 방지
     const oldCount = this.count;
     this.count += delta;

@@ -4,8 +4,7 @@
   "description": "Static site with Supabase integration",
   "scripts": {
     "build": "webpack --mode production",
-    "start_w": "webpack serve --mode development",
-    "start-w": "live-server src --port=3000"
+    "start": "live-server src --port=3000"
   },
   "keywords": [],
   "author": "",
