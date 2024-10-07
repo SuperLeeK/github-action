@@ -153,8 +153,8 @@ body {
 }
 
 .counter-image {
-  width: clamp(30px, 5vw, 40px);
-  height: clamp(30px, 5vw, 40px);
+  width: clamp(20px, 5vw, 40px);
+  height: clamp(20px, 5vw, 40px);
   margin-right: 10px; /* 이미지와 라벨 사이 간격 */
 }
 
