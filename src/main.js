@@ -1,21 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
   const countersContainer = document.getElementById('counters');
-  const filterSelect = document.getElementById('filterSelect');
   const typeFilterCheckbox = document.getElementById('typeFilterCheckbox');
   const columnSelect = document.getElementById('columnSelect');
+  const filterSelect = document.getElementById('filterSelect');
   let counters = [];
 
-  const savedFilterValue = localStorage.getItem('filterValue') || 'alphabetical';
   const savedTypeFilter = localStorage.getItem('typeFilter') === 'true';
   const savedColumnCount = localStorage.getItem('columnCount') || '1';
 
   // 저장된 값으로 필터 설정
-  filterSelect.value = savedFilterValue;
   typeFilterCheckbox.checked = savedTypeFilter;
   columnSelect.value = savedColumnCount;
 
   function saveFilterSettings() {
-    localStorage.setItem('filterValue', filterSelect.value);
     localStorage.setItem('typeFilter', typeFilterCheckbox.checked);
     localStorage.setItem('columnCount', columnSelect.value);
   }
@@ -49,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 페이지 로드 시 저장된 닉네임 불러오기
   loadNickname();
 
-  if (!countersContainer || !filterSelect || !typeFilterCheckbox || !columnSelect) {
+  if (!countersContainer || !typeFilterCheckbox || !columnSelect) {
     console.error('필요한 HTML 요소를 찾을 수 없습니다.');
     return;
   }
@@ -113,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
     saveFilterSettings();
   }
 
-  filterSelect.addEventListener('change', applyFilter);
   typeFilterCheckbox.addEventListener('change', applyFilter);
   columnSelect.addEventListener('change', updateColumns);
 
@@ -135,5 +131,29 @@ document.addEventListener('click', (event) => {
     !bottomRightControls.contains(event.target) &&
     event.target !== settingsButton) {
     bottomRightControls.classList.remove('open');
+  }
+});
+
+// 기존 코드 아래에 추가
+const filterButton = document.getElementById('filterButton');
+const filterOptions = document.getElementById('filterOptions');
+const filterLabel = document.getElementById('filterLabel');
+
+filterButton.addEventListener('click', () => {
+  filterOptions.style.display = filterOptions.style.display === 'none' ? 'block' : 'none';
+});
+
+document.querySelectorAll('.filter-option').forEach(option => {
+  option.addEventListener('click', function () {
+    document.getElementById('filterLabel').textContent = this.textContent;
+    document.getElementById('filterOptions').style.display = 'none';
+    applyFilter();
+  });
+});
+
+// 패널 외부 클릭 시 닫기
+document.addEventListener('click', (event) => {
+  if (!filterOptions.contains(event.target) && event.target !== filterButton) {
+    filterOptions.style.display = 'none';
   }
 });

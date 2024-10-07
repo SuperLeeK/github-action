@@ -8,8 +8,9 @@ body {
 
 .top-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  flex-wrap: nowrap;
   position: fixed; /* 추가 */
   top: 0; /* 추가 */
   left: 50%; /* 추가 */
@@ -18,63 +19,92 @@ body {
   max-width: 1200px; /* 추가 */
   background-color: #fff; /* 추가 */
   z-index: 1000; /* 추가 */
-  padding: 20px; /* 추가 */
+  padding: clamp(10px, 2vw, 20px);
   box-sizing: border-box; /* 추가 */
 }
 
-.nickname-input-container,
+.nickname-input-container {
+  display: flex;
+  align-items: center;
+  margin-right: clamp(10px, 2vw, 20px);
+}
+
 .controls-container {
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 
 #nicknameInput,
 #nicknameSaveButton,
 #columnSelect,
-#filterSelect,
-.type-filter label {
-  height: 36px;
-  box-sizing: border-box;
+.type-filter,
+#settingsButton,
+.icon-button {
+  height: clamp(30px, 4vw, 36px);
+  margin-right: clamp(5px, 1vw, 10px);
 }
 
-#nicknameInput {
-  padding: 0 10px;
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-#nicknameSaveButton {
-  padding: 0 15px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#columnSelect,
-#filterSelect {
-  padding: 0 10px;
-  font-size: 14px;
-}
-
-.type-filter label {
+.type-filter {
   display: flex;
   align-items: center;
-  font-size: 14px;
 }
 
 .type-filter input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.controls-container > * {
-  margin-left: 15px;
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.controls-container > *:first-child {
-  margin-left: 0;
+.icon-button img {
+  height: 100%;
+  width: auto;
+}
+
+#settingsButton {
+  margin-left: auto;
+}
+
+#nicknameInput {
+  padding: 0 clamp(5px, 1vw, 10px);
+  margin-right: clamp(5px, 1vw, 10px);
+  font-size: clamp(10px, 1.5vw, 14px);
+  width: clamp(100px, 15vw, 200px);
+}
+
+#nicknameSaveButton,
+#columnSelect,
+#filterSelect,
+#settingsButton {
+  padding: 0 clamp(10px, 1.5vw, 15px);
+  cursor: pointer;
+  font-size: clamp(10px, 1.5vw, 14px);
+  white-space: nowrap;
+}
+
+.type-filter label {
+  font-size: clamp(10px, 1.5vw, 14px);
+}
+
+.type-filter input[type="checkbox"] {
+  margin-right: clamp(3px, 0.5vw, 5px);
+  align-self: center; /* 추가 */
+}
+
+.controls-container > * {
+  display: flex; /* 추가 */
+  align-items: center; /* 추가 */
 }
 
 .filter-container {
-  margin-bottom: 20px;
   text-align: right;
 }
 
@@ -87,7 +117,6 @@ body {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   align-items: center;
-  margin-bottom: 20px;
   flex-wrap: wrap; /* 필요시 줄바꿈 */
 }
 
@@ -114,8 +143,7 @@ body {
 
 @media (max-width: 768px) {
   .top-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .nickname-input-container,
@@ -126,58 +154,76 @@ body {
 
   .controls-container {
     flex-wrap: wrap;
+    /* justify-content: flex-start; */
   }
 
   .controls-container > * {
     margin-left: 0;
-    margin-right: 15px;
-    margin-bottom: 10px;
+    margin-right: clamp(5px, 1vw, 10px);
+    /* margin-bottom: clamp(5px, 1vw, 10px); */
+    align-items: center;
+  }
+
+  body {
+    padding-top: clamp(120px, 20vw, 180px);
+  }
+
+  .type-filter,
+  .column-select,
+  .filter-container,
+  #settingsButton {
+    margin-bottom: clamp(5px, 1vw, 10px);
   }
 }
 
 .counters-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(250px, 30vw, 300px), 1fr)
+  );
+  gap: clamp(10px, 2vw, 20px);
 }
 
 .counter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px; /* 패딩 증가 */
-  font-size: 18px; /* 기본 폰트 크기 증가 */
+  padding: clamp(5px, 1vw, 10px);
+  font-size: clamp(14px, 2vw, 18px);
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
-  position: relative;
 }
 
 .counter-header {
   display: flex;
   align-items: center;
+  flex: 1;
 }
 
 .counter-image {
-  width: 40px; /* 이미지 크기를 절반으로 줄임 */
-  height: 40px; /* 이미지 크기를 절반으로 줄임 */
+  width: clamp(30px, 5vw, 40px);
+  height: clamp(30px, 5vw, 40px);
   margin-right: 10px; /* 이미지와 라벨 사이 간격 */
 }
 
 .counter-label {
-  font-size: 20px; /* 라벨 폰트 크기 증가 */
+  font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
 }
 
 .counter-controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .counter-value {
-  font-size: 24px; /* 카운터 값 폰트 크기 증가 */
-  margin: 0 15px; /* 버튼과의 간격 증가 */
+  font-size: clamp(18px, 3vw, 24px);
+  /* margin: 0 clamp(5px, 1vw, 15px); */
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
 }
 
 .tooltip {
@@ -221,13 +267,13 @@ body {
   font-weight: bold;
 }
 .counter button {
-  width: 30px;
-  height: 30px;
+  width: clamp(22px, 4vw, 30px);
+  height: clamp(22px, 4vw, 30px);
   padding: 0;
   border: none;
   background-color: #4caf50;
   color: white;
-  font-size: 40px;
+  font-size: clamp(14px, 2vw, 18px);
   line-height: 1;
   text-align: center;
   cursor: pointer;
@@ -415,4 +461,20 @@ button.decrement {
 
 .control-group button:hover {
   background-color: #e0355f;
+}
+
+#nicknameSaveButton,
+#columnSelect,
+#filterSelect,
+#settingsButton {
+  flex-shrink: 0;
+}
+
+.type-filter,
+.column-select,
+.filter-container {
+  margin-right: clamp(5px, 1vw, 10px);
+  height: 100%; /* 추가 */
+  display: flex; /* 추가 */
+  align-items: center; /* 추가 */
 }
