@@ -24,6 +24,7 @@ class Counter {
         <span class="counter-value" id="${this.id}">${this.count}</span>
         <button class="increment">+</button>
       </div>
+      <div class="last-modified">최근 수정: ${this.getFormattedLastModified()}</div>
     `;
 
     const decrementButton = element.querySelector('.decrement');
@@ -32,9 +33,12 @@ class Counter {
     decrementButton.addEventListener('click', () => this.changeCount(-1));
     incrementButton.addEventListener('click', () => this.changeCount(1));
 
-    // 횟수 표시 요소에 클릭 이벤트를 추가하지 않음
-
     return element;
+  }
+
+  getFormattedLastModified() {
+    if (!this.lastModified) return '없음';
+    return new Date(this.lastModified).toLocaleString();
   }
 
   changeCount(delta) {
@@ -81,28 +85,28 @@ class Counter {
     const copyTooltip = document.createElement('div');
     copyTooltip.className = 'copy-tooltip';
     copyTooltip.innerHTML = `복사됨!<br><span class="copied-text">${copiedText}</span>`;
-    this.element.appendChild(copyTooltip);
+    
+    // 툴팁을 body에 추가
+    document.body.appendChild(copyTooltip);
 
-    // 툴팁 위치 조정
-    const tooltipRect = copyTooltip.getBoundingClientRect();
-    const parentRect = this.element.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-
-    if (parentRect.bottom + tooltipRect.height > viewportHeight) {
-      copyTooltip.style.bottom = '100%';
-      copyTooltip.style.top = 'auto';
-    }
+    // 화면 중앙 위치 계산
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    
+    // 툴팁 위치 설정
+    copyTooltip.style.left = `${viewportWidth / 2}px`;
+    copyTooltip.style.top = `20px`; // 화면 상단에서 20px 아래에 위치
 
     // 툴팁이 나타나는 애니메이션 효과
     setTimeout(() => {
       copyTooltip.style.opacity = '1';
-      copyTooltip.style.transform = 'translateY(0)';
+      copyTooltip.style.transform = 'translate(-50%, 0) scale(1)';
     }, 10);
 
     setTimeout(() => {
       // 툴팁이 사라지는 애니메이션 효과
       copyTooltip.style.opacity = '0';
-      copyTooltip.style.transform = 'translateY(10px)';
+      copyTooltip.style.transform = 'translate(-50%, 0) scale(0.9)';
 
       // 애니메이션이 끝난 후 요소 제거
       setTimeout(() => {
@@ -116,15 +120,22 @@ class Counter {
       const tooltip = document.createElement('div');
       tooltip.className = 'tooltip';
       tooltip.textContent = `최근 수정: ${new Date(this.lastModified).toLocaleString()}`;
-      this.element.appendChild(tooltip);
+      
+      // 마우스 위치에 툴팁 표시
+      document.addEventListener('mousemove', (e) => {
+        tooltip.style.left = `${e.clientX + 10}px`;
+        tooltip.style.top = `${e.clientY + 10}px`;
+      });
+      
+      document.body.appendChild(tooltip);
+      this.tooltipElement = tooltip;
     }
-    // else 조건 제거: 수정되지 않은 경우 아무 작업도 하지 않음
   }
 
   hideLastModified() {
-    const tooltip = this.element.querySelector('.tooltip');
-    if (tooltip) {
-      tooltip.remove();
+    if (this.tooltipElement) {
+      this.tooltipElement.remove();
+      this.tooltipElement = null;
     }
   }
 
@@ -155,6 +166,10 @@ class Counter {
   updateLastModified() {
     this.lastModified = Date.now();
     localStorage.setItem(`lastModified_${this.id}`, this.lastModified);
+    const lastModifiedElement = this.element.querySelector('.last-modified');
+    if (lastModifiedElement) {
+      lastModifiedElement.textContent = `최근 수정: ${this.getFormattedLastModified()}`;
+    }
   }
 
   loadLastModified() {

@@ -5,6 +5,12 @@ function exportData() {
     settings: JSON.parse(localStorage.getItem('settings') || '{}')
   };
 
+  // 설정에서 닉네임 가져오기
+  const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+  const nickname = settings.nickname || 'my_counter';
+
+  const exportFileDefaultName = `${nickname}_settings.json`;
+
   // 카운터 데이터 수집
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -15,8 +21,6 @@ function exportData() {
 
   const dataStr = JSON.stringify(data);
   const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-
-  const exportFileDefaultName = 'my_counter_data.json';
 
   const linkElement = document.createElement('a');
   linkElement.setAttribute('href', dataUri);
