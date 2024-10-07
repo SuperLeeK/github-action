@@ -43,7 +43,7 @@ body {
 .type-filter {
   display: flex;
   align-items: center;
-  min-width: 80px; /* 추가: 최소 너비 설정 */
+  min-width: 40px; /* 추가: 최소 너비 설정 */
 }
 
 .type-filter input[type="checkbox"] {
@@ -73,7 +73,7 @@ body {
   padding: 0 clamp(5px, 1vw, 10px);
   margin-right: clamp(5px, 1vw, 10px);
   font-size: clamp(12px, 1.5vw, 16px);
-  width: clamp(100px, 15vw, 200px);
+  width: clamp(60px, 15vw, 200px);
 }
 
 #nicknameSaveButton,
@@ -87,7 +87,7 @@ body {
 .type-filter label {
   font-size: clamp(12px, 1.5vw, 16px);
   white-space: nowrap; /* 추가: 라벨 텍스트가 줄 바꿈되지 않도록 설정 */
-  min-width: 60px; /* 추가: 라벨의 최소 너비 설정 */
+  min-width: 40px; /* 추가: 라벨의 최소 너비 설정 */
 }
 
 .type-filter input[type="checkbox"] {
@@ -347,12 +347,15 @@ button.decrement {
   background-color: #e0355f; /* 호버 시 약간 더 어두운 색상 */
 }
 
+#nicknameSaveButton,
 #settingsButton {
   background-color: #ff3b6e;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 15px;
+  /* padding: 10px 15px; */
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   font-size: 14px;
 }
@@ -423,7 +426,7 @@ button.decrement {
 
 #columnSelect,
 #filterSelect {
-  padding: 5px 10px;
+  padding: 5px 5px;
   font-size: 16px;
   height: clamp(30px, 4vw, 36px);
   margin-right: clamp(5px, 1vw, 10px);
