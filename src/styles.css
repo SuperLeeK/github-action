@@ -1,0 +1,249 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nickname-input-container,
+.controls-container {
+  display: flex;
+  align-items: center;
+}
+
+#nicknameInput,
+#nicknameSaveButton,
+#columnSelect,
+#filterSelect,
+.type-filter label {
+  height: 36px;
+  box-sizing: border-box;
+}
+
+#nicknameInput {
+  padding: 0 10px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+#nicknameSaveButton {
+  padding: 0 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#columnSelect,
+#filterSelect {
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+
+.type-filter label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.type-filter input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.controls-container > * {
+  margin-left: 15px;
+}
+
+.controls-container > *:first-child {
+  margin-left: 0;
+}
+
+
+.filter-container {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+#filterSelect {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* 필요시 줄바꿈 */
+}
+
+.type-filter, .filter-container, .column-select {
+  margin: 0 10px;
+}
+
+.type-container {
+  margin-bottom: 20px;
+}
+
+.type-container h2 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.counters-grid {
+  display: grid;
+  gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .top-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .nickname-input-container,
+  .controls-container {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  .controls-container {
+      flex-wrap: wrap;
+  }
+
+  .controls-container > * {
+      margin-left: 0;
+      margin-right: 15px;
+      margin-bottom: 10px;
+  }
+}
+
+.counters-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.copy-tooltip {
+  position: absolute;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 2;
+  bottom: -40px;  /* 더 아래로 내림 */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  text-align: center;
+}
+.copy-tooltip .copied-text {
+  font-size: 10px;
+  opacity: 0.8;
+}
+.counter-label {
+  flex: 1;
+  font-weight: bold;
+}
+.counter button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    position: relative;
+}
+
+.counter button:hover {
+    background-color: #45a049;
+}
+
+.counter button::before,
+.counter button::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+}
+
+.counter button.increase::before,
+.counter button.increase::after {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.counter button.increase::before {
+    width: 14px;
+    height: 2px;
+}
+
+.counter button.increase::after {
+    width: 2px;
+    height: 14px;
+}
+
+.counter button.decrease::before {
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.counter-value {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .counters-container {
+      grid-template-columns: 1fr;
+  }
+}

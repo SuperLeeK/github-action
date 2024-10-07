@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDR-EC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>ORDR - EC</h1>
+    <div class="top-container">
+        <div class="nickname-input-container">
+            <input type="text" id="nicknameInput" placeholder="닉네임 입력">
+            <button id="nicknameSaveButton">저장</button>
+        </div>
+        <div class="controls-container">
+            <div class="type-filter">
+                <label><input type="checkbox" id="typeFilterCheckbox"> 타입별로 보기</label>
+            </div>
+            <div class="column-select">
+                <select id="columnSelect">
+                    <option value="1">1열</option>
+                    <option value="2">2열</option>
+                    <option value="3">3열</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <select id="filterSelect">
+                    <option value="alphabetical">가나다순</option>
+                    <option value="count">횟수순</option>
+                    <option value="lastModified">최신수정순</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="counters"></div>
+
+    <script src="bundle.js"></script>
+    <script src="counter.js"></script>
+    <script src="counterConfig.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
