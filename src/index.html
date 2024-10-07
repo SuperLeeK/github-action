@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <h1>ORDR - EC</h1>
     <div class="top-container">
         <div class="nickname-input-container">
             <input type="text" id="nicknameInput" placeholder="닉네임 입력">
@@ -38,12 +37,6 @@
     </div>
     <div id="counters"></div>
     <!-- 설정 패널 추가 -->
-    <div id="bottom-left-controls" class="control-group">
-        <button id="setSavePathButton">세이브 폴더 설정</button>
-        <button id="openSavePathButton">세이브 폴더 열기</button>
-        <button id="setScreenshotPathButton">스크린샷 폴더 설정</button>
-        <button id="openScreenshotPathButton">스크린샷 폴더 열기</button>
-    </div>
     <div id="bottom-right-controls" class="control-group">
         <button id="exportButton" onclick="exportData()">내보내기</button>
         <input type="file" id="importFile" style="display:none;" onchange="importData(this.files[0])">
@@ -55,7 +48,6 @@
     <script src="counterConfig.js"></script>
     <script src="main.js"></script>
     <script src="data.js"></script>
-    <script src="folderPaths.js"></script>
 </body>
 
 

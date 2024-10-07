@@ -3,18 +3,23 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-}
-
-h1 {
-  color: #333;
-  text-align: center;
+  padding-top: 100px; /* 추가: top-container의 높이에 따라 조정 필요 */
 }
 
 .top-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  position: fixed; /* 추가 */
+  top: 0; /* 추가 */
+  left: 50%; /* 추가 */
+  transform: translateX(-50%); /* 추가 */
+  width: 100%; /* 추가 */
+  max-width: 1200px; /* 추가 */
+  background-color: #fff; /* 추가 */
+  z-index: 1000; /* 추가 */
+  padding: 20px; /* 추가 */
+  box-sizing: border-box; /* 추가 */
 }
 
 .nickname-input-container,
@@ -311,7 +316,6 @@ button.decrement {
   /* padding: 8px 12px; 버튼 크기 증가 */
 }
 
-#bottom-left-controls,
 #bottom-right-controls {
   position: fixed;
   bottom: -200px; /* 초기에는 화면 밖에 위치 */
@@ -321,15 +325,10 @@ button.decrement {
   transition: bottom 0.3s ease-in-out;
 }
 
-#bottom-left-controls {
-  left: 20px;
-}
-
 #bottom-right-controls {
   right: 20px;
 }
 
-#bottom-left-controls.open,
 #bottom-right-controls.open {
   bottom: 20px; /* 열릴 때 화면 안으로 이동 */
 }
@@ -339,7 +338,6 @@ button.decrement {
   gap: 10px;
 }
 
-#bottom-left-controls button,
 #bottom-right-controls button {
   padding: 10px 15px;
   background-color: #ff3b6e; /* 요청하신 정확한 핑크 색상으로 변경 */
@@ -355,7 +353,6 @@ button.decrement {
   text-overflow: ellipsis;
 }
 
-#bottom-left-controls button:hover,
 #bottom-right-controls button:hover {
   background-color: #e0355f; /* 호버 시 약간 더 어두운 색상 */
 }
