@@ -4,7 +4,9 @@
   "description": "Static site with Supabase integration",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "live-server src --port=3000"
+    "start": "live-server src --port=3000",
+    "dev": "webpack serve --mode development --open --hot",
+    "clean-images": "node scripts/clean-images.js"
   },
   "keywords": [],
   "author": "",

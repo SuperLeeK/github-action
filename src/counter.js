@@ -1,9 +1,10 @@
 class Counter {
-  constructor({ uid, label, type, grade }) {
+  constructor({ uid, label, type, grade, image }) {
     this.id = uid;
     this.label = label;
     this.type = type;
     this.grade = grade;
+    this.image = image; // 새로운 image 속성 추가
     this.count = this.loadCount();
     this.lastModified = this.loadLastModified();
     this.element = this.createCounterElement();
@@ -14,7 +15,10 @@ class Counter {
     const element = document.createElement('div');
     element.className = 'counter';
     element.innerHTML = `
-      <span class="counter-label">${this.label}</span>
+      <div class="counter-header">
+        <img src="${this.image}" alt="${this.label}" class="counter-image">
+        <span class="counter-label">${this.label}</span>
+      </div>
       <div class="counter-controls">
         <button class="decrement">-</button>
         <span class="counter-value" id="${this.id}">${this.count}</span>

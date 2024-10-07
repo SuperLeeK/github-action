@@ -140,11 +140,39 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px; /* 패딩 증가 */
+  font-size: 18px; /* 기본 폰트 크기 증가 */
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
   position: relative;
+}
+
+.counter-header {
+  display: flex;
+  align-items: center;
+}
+
+.counter-image {
+  width: 40px; /* 이미지 크기를 절반으로 줄임 */
+  height: 40px; /* 이미지 크기를 절반으로 줄임 */
+  margin-right: 10px; /* 이미지와 라벨 사이 간격 */
+}
+
+.counter-label {
+  font-size: 20px; /* 라벨 폰트 크기 증가 */
+  font-weight: bold;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter-value {
+  font-size: 24px; /* 카운터 값 폰트 크기 증가 */
+  margin: 0 15px; /* 버튼과의 간격 증가 */
 }
 
 .tooltip {
@@ -194,7 +222,7 @@ h1 {
   border: none;
   background-color: #4caf50;
   color: white;
-  font-size: 20px;
+  font-size: 40px;
   line-height: 1;
   text-align: center;
   cursor: pointer;
@@ -275,4 +303,10 @@ h1 {
 
 #counters {
   margin-bottom: 60px; /* 버튼과의 간격을 위해 추가 */
+}
+
+button.increment,
+button.decrement {
+  font-size: 20px; /* 버튼 폰트 크기 증가 */
+  /* padding: 8px 12px; 버튼 크기 증가 */
 }
