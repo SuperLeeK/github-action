@@ -120,3 +120,23 @@ document.addEventListener('DOMContentLoaded', function () {
   // 초기 적용
   applyFilter();
 })
+
+// 기존 코드 아래에 추가
+const settingsButton = document.getElementById('settingsButton');
+const bottomLeftControls = document.getElementById('bottom-left-controls');
+const bottomRightControls = document.getElementById('bottom-right-controls');
+
+settingsButton.addEventListener('click', () => {
+  bottomLeftControls.classList.toggle('open');
+  bottomRightControls.classList.toggle('open');
+});
+
+// 패널 외부 클릭 시 닫기
+document.addEventListener('click', (event) => {
+  if (!bottomLeftControls.contains(event.target) &&
+    !bottomRightControls.contains(event.target) &&
+    event.target !== settingsButton) {
+    bottomLeftControls.classList.remove('open');
+    bottomRightControls.classList.remove('open');
+  }
+});

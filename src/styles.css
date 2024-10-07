@@ -314,10 +314,11 @@ button.decrement {
 #bottom-left-controls,
 #bottom-right-controls {
   position: fixed;
-  bottom: 20px;
+  bottom: -200px; /* 초기에는 화면 밖에 위치 */
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: bottom 0.3s ease-in-out;
 }
 
 #bottom-left-controls {
@@ -326,6 +327,11 @@ button.decrement {
 
 #bottom-right-controls {
   right: 20px;
+}
+
+#bottom-left-controls.open,
+#bottom-right-controls.open {
+  bottom: 20px; /* 열릴 때 화면 안으로 이동 */
 }
 
 .control-group {
@@ -352,4 +358,64 @@ button.decrement {
 #bottom-left-controls button:hover,
 #bottom-right-controls button:hover {
   background-color: #e0355f; /* 호버 시 약간 더 어두운 색상 */
+}
+
+#settingsButton {
+  background-color: #ff3b6e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#settingsButton:hover {
+  background-color: #e0355f;
+}
+
+.settings-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background-color: rgba(240, 240, 240, 0.9);
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.settings-panel.open {
+  height: 200px; /* 또는 원하는 높이 */
+}
+
+.settings-content {
+  padding: 20px;
+}
+
+.settings-content h2 {
+  margin-bottom: 20px;
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group button {
+  width: 180px;
+  background-color: #ff3b6e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.control-group button:hover {
+  background-color: #e0355f;
 }
