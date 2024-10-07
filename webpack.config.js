@@ -14,7 +14,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         // { from: 'src/index.html', to: 'index.html' },
-        // { from: 'src/main.js', to: 'main.js' },
+        { from: 'src/main.js', to: 'main.js' },
         { from: 'src/counter.js', to: 'counter.js' },
         { from: 'src/counterConfig.js', to: 'counterConfig.js' },
         { from: 'src/styles.css', to: 'styles.css' },
