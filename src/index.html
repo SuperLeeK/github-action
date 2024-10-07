@@ -36,20 +36,21 @@
         </div>
     </div>
     <div id="counters"></div>
-    <div id="data-import-export">
-        <button id="exportButton" onclick="exportData()">내보내기</button>
-        <input type="file" id="importFile" style="display:none;" onchange="importData(this.files[0])">
-        <button id="importButton" onclick="document.getElementById('importFile').click()">불러오기</button>
-    </div>
-
-    <div id="folder-paths">
-        <div>
+    <div id="bottom-left-controls">
+        <div class="control-group">
             <button id="setSavePathButton">세이브 폴더 설정</button>
             <button id="openSavePathButton">세이브 폴더 열기</button>
         </div>
-        <div>
+        <div class="control-group">
             <button id="setScreenshotPathButton">스크린샷 폴더 설정</button>
             <button id="openScreenshotPathButton">스크린샷 폴더 열기</button>
+        </div>
+    </div>
+    <div id="bottom-right-controls">
+        <div class="control-group">
+            <button id="exportButton" onclick="exportData()">내보내기</button>
+            <input type="file" id="importFile" style="display:none;" onchange="importData(this.files[0])">
+            <button id="importButton" onclick="document.getElementById('importFile').click()">불러오기</button>
         </div>
     </div>
 
