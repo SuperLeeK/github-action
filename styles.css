@@ -1,0 +1,504 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 100px;
+  /* 추가: top-container의 높이에 따라 조정 필요 */
+}
+
+.top-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: fixed;
+  /* 추가 */
+  top: 0;
+  /* 추가 */
+  left: 50%;
+  /* 추가 */
+  transform: translateX(-50%);
+  /* 추가 */
+  width: 100%;
+  /* 추가 */
+  max-width: 1200px;
+  /* 추가 */
+  max-height: 100px;
+  background-color: #fff;
+  /* 추가 */
+  z-index: 1000;
+  /* 추가 */
+  padding: clamp(10px, 2vw, 20px);
+  box-sizing: border-box;
+  /* 추가 */
+  justify-content: space-between;
+}
+
+.nickname-input-container {
+  display: flex;
+  align-items: center;
+  margin-right: clamp(10px, 2vw, 20px);
+}
+
+#nicknameInput,
+#nicknameSaveButton,
+.type-filter,
+#settingsButton,
+.icon-button {
+  height: clamp(30px, 4vw, 36px);
+  margin-right: clamp(5px, 1vw, 10px);
+}
+
+.type-filter {
+  display: flex;
+  align-items: center;
+  min-width: 40px;
+  /* 추가: 최소 너비 설정 */
+}
+
+.type-filter input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button img {
+  height: 100%;
+  width: auto;
+}
+
+#settingsButton {
+  margin-left: auto;
+}
+
+#nicknameInput {
+  padding: 0 clamp(5px, 1vw, 10px);
+  margin-right: clamp(5px, 1vw, 10px);
+  font-size: clamp(12px, 1.5vw, 16px);
+  width: clamp(60px, 15vw, 200px);
+}
+
+#nicknameSaveButton,
+#settingsButton {
+  padding: 0 clamp(10px, 1.5vw, 15px);
+  cursor: pointer;
+  font-size: clamp(12px, 1.5vw, 16px);
+  white-space: nowrap;
+}
+
+.type-filter label {
+  font-size: clamp(12px, 1.5vw, 16px);
+  white-space: nowrap;
+  /* 추가: 라벨 텍스트가 줄 바꿈되지 않도록 설정 */
+  min-width: 40px;
+  /* 추가: 라벨의 최소 너비 설정 */
+}
+
+.type-filter input[type="checkbox"] {
+  margin-right: clamp(3px, 0.5vw, 5px);
+  align-self: center;
+  /* 추가 */
+}
+
+.filter-container {
+  text-align: right;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: flex-end;
+  /* 오른쪽 정렬 */
+  align-items: center;
+}
+
+.type-filter,
+.filter-container,
+.column-select {
+  margin: 0 10px;
+}
+
+.type-container {
+  margin-bottom: 20px;
+}
+
+.type-container h2 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.counters-grid {
+  display: grid;
+  gap: 5px;
+}
+
+.counters-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(250px, 30vw, 300px), 1fr)
+  );
+  gap: clamp(10px, 2vw, 20px);
+}
+
+.counter {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(5px, 1vw, 10px);
+  font-size: clamp(12px, 2vw, 16px);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.counter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #71ff76, #00ff0d);
+  opacity: 0.3;
+  z-index: 0;
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  transform: scaleX(var(--fill-percentage, 0));
+}
+
+.counter-header {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.counter-image {
+  width: clamp(20px, 5vw, 60px);
+  height: clamp(20px, 5vw, 60px);
+  margin-right: 10px;
+  z-index: 100;
+  /* 이미지와 라벨 사이 간격 */
+}
+
+.counter-label {
+  font-size: clamp(12px, 2.5vw, 16px);
+  font-weight: bold;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+}
+
+.counter-value {
+  font-size: clamp(12px, 3vw, 16px);
+  /* margin: 0 clamp(5px, 1vw, 15px); */
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.copy-tooltip {
+  position: fixed;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+  white-space: nowrap;
+  opacity: 0;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  text-align: center;
+  pointer-events: none;
+  transform: translate(-50%, 0) scale(0.9);
+}
+
+.copy-tooltip .copied-text {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.counter-label {
+  flex: 1;
+  font-weight: bold;
+}
+
+.counter button {
+  width: clamp(22px, 4vw, 30px);
+  height: clamp(22px, 4vw, 30px);
+  padding: 0;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: clamp(12px, 2vw, 16px);
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+}
+
+.counter button:hover {
+  background-color: #45a049;
+}
+
+.counter button::before,
+.counter button::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+}
+
+.counter button.increase::before,
+.counter button.increase::after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.counter button.increase::before {
+  width: 14px;
+  height: 2px;
+}
+
+.counter button.increase::after {
+  width: 2px;
+  height: 14px;
+}
+
+.counter button.decrease::before {
+  width: 14px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.counter-value {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+}
+
+#data-import-export {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+#data-import-export button {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: white;
+  background-color: #ff3b6e;
+  /* 색상 변경 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#data-import-export button:hover {
+  background-color: #e0355f;
+  /* hover 시 색상도 약간 어둡게 조정 */
+}
+
+#counters {
+  margin-bottom: 60px;
+  /* 버튼과의 간격을 위해 추가 */
+}
+
+button.increment,
+button.decrement {
+  font-size: 20px;
+  /* 버튼 폰트 크기 증가 */
+  /* padding: 8px 12px; 버튼 크기 증가 */
+}
+
+#bottom-right-controls {
+  position: fixed;
+  bottom: -200px;
+  /* 초기에는 화면 밖에 위치 */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: bottom 0.3s ease-in-out;
+}
+
+#bottom-right-controls {
+  right: 20px;
+}
+
+#bottom-right-controls.open {
+  bottom: 20px;
+  /* 열릴 때 화면 안으로 이동 */
+}
+
+.control-group {
+  display: flex;
+  gap: 10px;
+}
+
+#bottom-right-controls button {
+  padding: 10px 15px;
+  background-color: #ff3b6e;
+  /* 요청하신 정확한 핑크 색상으로 변경 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 180px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#bottom-right-controls button:hover {
+  background-color: #e0355f;
+  /* 호버 시 약간 더 어두운 색상 */
+}
+
+#nicknameSaveButton,
+#settingsButton {
+  background-color: #ff3b6e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  /* padding: 10px 15px; */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#settingsButton:hover {
+  background-color: #e0355f;
+}
+
+.settings-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background-color: rgba(240, 240, 240, 0.9);
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.settings-panel.open {
+  height: 200px;
+  /* 또는 원하는 높이 */
+}
+
+.settings-content {
+  padding: 20px;
+}
+
+.settings-content h2 {
+  margin-bottom: 20px;
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group button {
+  width: 180px;
+  background-color: #ff3b6e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.control-group button:hover {
+  background-color: #e0355f;
+}
+
+#nicknameSaveButton,
+#settingsButton {
+  flex-shrink: 0;
+}
+
+.type-filter,
+.column-select,
+.filter-container {
+  margin-right: clamp(5px, 1vw, 10px);
+  height: 100%;
+  /* 추가 */
+  display: flex;
+  /* 추가 */
+  align-items: center;
+  /* 추가 */
+}
+
+#columnSelect,
+#filterSelect {
+  padding: 5px 5px;
+  font-size: 16px;
+  height: clamp(30px, 4vw, 36px);
+  margin-right: clamp(5px, 1vw, 10px);
+  cursor: pointer;
+}
+
+.last-modified {
+  position: absolute;
+  bottom: 0;
+  /* 카운터 아래에 위치 */
+  right: 8px;
+  font-size: clamp(4px, 1vw, 16px);
+  /* 폰트 크기를 더 작게 조정 */
+  color: #999;
+  /* 색상을 더 연하게 조정 */
+  text-align: center;
+  padding: 2px 0;
+  /* 반투명 배경 추가 */
+}
