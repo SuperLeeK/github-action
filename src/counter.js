@@ -51,7 +51,7 @@ class Counter {
     this.count += delta;
     this.updateDisplay();
     this.saveCount();
-    if (this.count !== 0 || oldCount !== 0) {
+    if (this.count !== oldCount) {
       this.updateLastModified();
     }
     this.copyToClipboard();
@@ -85,16 +85,28 @@ class Counter {
     copyTooltip.innerHTML = `복사됨!<br><span class="copied-text">${copiedText}</span>`;
     this.element.appendChild(copyTooltip);
 
+    // 툴팁 위치 조정
+    const tooltipRect = copyTooltip.getBoundingClientRect();
+    const parentRect = this.element.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    let topPosition = '0';
+    if (parentRect.bottom + tooltipRect.height > viewportHeight) {
+      topPosition = `-${tooltipRect.height}px`;
+    }
+
+    copyTooltip.style.top = topPosition;
+
     // 툴팁이 나타나는 애니메이션 효과
     setTimeout(() => {
       copyTooltip.style.opacity = '1';
-      copyTooltip.style.transform = 'translate(-50%, 0)';
+      copyTooltip.style.transform = `translate(-50%, ${topPosition === '0' ? '0' : '-10px'})`;
     }, 10);
 
     setTimeout(() => {
       // 툴팁이 사라지는 애니메이션 효과
       copyTooltip.style.opacity = '0';
-      copyTooltip.style.transform = 'translate(-50%, 10px)';
+      copyTooltip.style.transform = `translate(-50%, ${topPosition === '0' ? '10px' : '-20px'})`;
 
       // 애니메이션이 끝난 후 요소 제거
       setTimeout(() => {
@@ -104,10 +116,12 @@ class Counter {
   }
 
   showLastModified() {
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = `최근 수정: ${new Date(this.lastModified).toLocaleString()}`;
-    this.element.appendChild(tooltip);
+    if (this.lastModified) {
+      const tooltip = document.createElement('div');
+      tooltip.className = 'tooltip';
+      tooltip.textContent = `최근 수정: ${new Date(this.lastModified).toLocaleString()}`;
+      this.element.appendChild(tooltip);
+    }
   }
 
   hideLastModified() {
@@ -147,7 +161,8 @@ class Counter {
   }
 
   loadLastModified() {
-    return parseInt(localStorage.getItem(`lastModified_${this.id}`)) || Date.now();
+    const savedLastModified = localStorage.getItem(`lastModified_${this.id}`);
+    return savedLastModified ? parseInt(savedLastModified) : null;
   }
 
   updateDisplay() {
