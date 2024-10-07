@@ -21,6 +21,7 @@ body {
   z-index: 1000; /* 추가 */
   padding: clamp(10px, 2vw, 20px);
   box-sizing: border-box; /* 추가 */
+  justify-content: space-between;
 }
 
 .nickname-input-container {
@@ -29,15 +30,8 @@ body {
   margin-right: clamp(10px, 2vw, 20px);
 }
 
-.controls-container {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-}
-
 #nicknameInput,
 #nicknameSaveButton,
-#columnSelect,
 .type-filter,
 #settingsButton,
 .icon-button {
@@ -76,22 +70,20 @@ body {
 #nicknameInput {
   padding: 0 clamp(5px, 1vw, 10px);
   margin-right: clamp(5px, 1vw, 10px);
-  font-size: clamp(10px, 1.5vw, 14px);
+  font-size: clamp(12px, 1.5vw, 16px);
   width: clamp(100px, 15vw, 200px);
 }
 
 #nicknameSaveButton,
-#columnSelect,
-#filterSelect,
 #settingsButton {
   padding: 0 clamp(10px, 1.5vw, 15px);
   cursor: pointer;
-  font-size: clamp(10px, 1.5vw, 14px);
+  font-size: clamp(12px, 1.5vw, 16px);
   white-space: nowrap;
 }
 
 .type-filter label {
-  font-size: clamp(10px, 1.5vw, 14px);
+  font-size: clamp(12px, 1.5vw, 16px);
 }
 
 .type-filter input[type="checkbox"] {
@@ -99,25 +91,14 @@ body {
   align-self: center; /* 추가 */
 }
 
-.controls-container > * {
-  display: flex; /* 추가 */
-  align-items: center; /* 추가 */
-}
-
 .filter-container {
   text-align: right;
-}
-
-#filterSelect {
-  padding: 5px 10px;
-  font-size: 16px;
 }
 
 .controls-container {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
   align-items: center;
-  flex-wrap: wrap; /* 필요시 줄바꿈 */
 }
 
 .type-filter,
@@ -141,41 +122,6 @@ body {
   gap: 5px;
 }
 
-@media (max-width: 768px) {
-  .top-container {
-    flex-wrap: wrap;
-  }
-
-  .nickname-input-container,
-  .controls-container {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .controls-container {
-    flex-wrap: wrap;
-    /* justify-content: flex-start; */
-  }
-
-  .controls-container > * {
-    margin-left: 0;
-    margin-right: clamp(5px, 1vw, 10px);
-    /* margin-bottom: clamp(5px, 1vw, 10px); */
-    align-items: center;
-  }
-
-  body {
-    padding-top: clamp(120px, 20vw, 180px);
-  }
-
-  .type-filter,
-  .column-select,
-  .filter-container,
-  #settingsButton {
-    margin-bottom: clamp(5px, 1vw, 10px);
-  }
-}
-
 .counters-container {
   display: grid;
   grid-template-columns: repeat(
@@ -190,7 +136,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: clamp(5px, 1vw, 10px);
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: clamp(12px, 2vw, 16px);
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
@@ -209,7 +155,7 @@ body {
 }
 
 .counter-label {
-  font-size: clamp(16px, 2.5vw, 20px);
+  font-size: clamp(12px, 2.5vw, 16px);
   font-weight: bold;
 }
 
@@ -219,7 +165,7 @@ body {
 }
 
 .counter-value {
-  font-size: clamp(18px, 3vw, 24px);
+  font-size: clamp(12px, 3vw, 16px);
   /* margin: 0 clamp(5px, 1vw, 15px); */
   display: inline-block;
   min-width: 30px;
@@ -273,7 +219,7 @@ body {
   border: none;
   background-color: #4caf50;
   color: white;
-  font-size: clamp(14px, 2vw, 18px);
+  font-size: clamp(12px, 2vw, 16px);
   line-height: 1;
   text-align: center;
   cursor: pointer;
@@ -321,12 +267,6 @@ body {
   display: inline-block;
   min-width: 30px;
   text-align: center;
-}
-
-@media (max-width: 600px) {
-  .counters-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 #data-import-export {
@@ -464,8 +404,6 @@ button.decrement {
 }
 
 #nicknameSaveButton,
-#columnSelect,
-#filterSelect,
 #settingsButton {
   flex-shrink: 0;
 }
@@ -477,4 +415,13 @@ button.decrement {
   height: 100%; /* 추가 */
   display: flex; /* 추가 */
   align-items: center; /* 추가 */
+}
+
+#columnSelect,
+#filterSelect {
+  padding: 5px 10px;
+  font-size: 16px;
+  height: clamp(30px, 4vw, 36px);
+  margin-right: clamp(5px, 1vw, 10px);
+  cursor: pointer;
 }
