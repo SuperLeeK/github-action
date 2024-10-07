@@ -90,23 +90,21 @@ class Counter {
     const parentRect = this.element.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
 
-    let topPosition = '0';
     if (parentRect.bottom + tooltipRect.height > viewportHeight) {
-      topPosition = `-${tooltipRect.height}px`;
+      copyTooltip.style.bottom = '100%';
+      copyTooltip.style.top = 'auto';
     }
-
-    copyTooltip.style.top = topPosition;
 
     // 툴팁이 나타나는 애니메이션 효과
     setTimeout(() => {
       copyTooltip.style.opacity = '1';
-      copyTooltip.style.transform = `translate(-50%, ${topPosition === '0' ? '0' : '-10px'})`;
+      copyTooltip.style.transform = 'translateY(0)';
     }, 10);
 
     setTimeout(() => {
       // 툴팁이 사라지는 애니메이션 효과
       copyTooltip.style.opacity = '0';
-      copyTooltip.style.transform = `translate(-50%, ${topPosition === '0' ? '10px' : '-20px'})`;
+      copyTooltip.style.transform = 'translateY(10px)';
 
       // 애니메이션이 끝난 후 요소 제거
       setTimeout(() => {
@@ -122,6 +120,7 @@ class Counter {
       tooltip.textContent = `최근 수정: ${new Date(this.lastModified).toLocaleString()}`;
       this.element.appendChild(tooltip);
     }
+    // else 조건 제거: 수정되지 않은 경우 아무 작업도 하지 않음
   }
 
   hideLastModified() {
